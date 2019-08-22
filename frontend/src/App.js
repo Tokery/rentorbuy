@@ -2,14 +2,31 @@ import React from 'react';
 import MortgageService from './mortgageService';
 
 
-class App {
+class App extends React.Component {
   constructor() {
-    this.state = {}
+    super();
+    this.state = {
+      mortgageDetails: {
+        loanAmt: 1,
+        interest: 1,
+        amortPeriod: 1,
+      },
+    };
+
+    this.onInputChanged = this.onInputChanged.bind(this);
   }
 
-  onInputChanged() {
-    
+  onInputChanged(event) {
+    const target = event.target;
+    const value = target.value;
+    const name = target.name;
+
+    const newMortgageDetails = Object.assign(this.state.mortgageDetails, {[name]: value});
+    this.setState({
+      mortgageDetails: newMortgageDetails,
+    })
   }
+
 
   render() {
     return (
@@ -17,16 +34,18 @@ class App {
         <div className="mortgage-inputs">
           <label>
             Loan Amount
+            <input name="loanAmt" type="text" value={this.state.mortgageDetails.loanAmt} onChange={this.onInputChanged}/>
           </label>
-          <input type="text"/>
+          
           <label>
             Annual Interest
+            <input name="interest" type="text" value={this.state.mortgageDetails.interest} onChange={this.onInputChanged}/>
           </label>
-          <input type="text"/>
           <label>
             Amortization period
+            <input name="amortPeriod" type="text" value={this.state.mortgageDetails.amortPeriod} onChange={this.onInputChanged}/>
           </label>
-          <input type="text"/>
+          {MortgageService.calculateMonthlyPayment(this.state.mortgageDetails.loanAmt, this.state.mortgageDetails.interest, this.state.mortgageDetails.amortPeriod)}
         </div>
       </div>
     );
