@@ -84,6 +84,7 @@ class App extends React.Component {
               margin="normal"
             />
             <Header type="h4" text={`You will pay ${formatCurrency(mortgagePayment)} per month`} />
+            <Header type="h4" text={`You could receive ${formatCurrency(this.state.mortgageDetails.loanAmt)}`} />
           </div>
           <div className="rent-inputs">
             <Header type="h3" text="Rent a home" />
@@ -107,10 +108,7 @@ class App extends React.Component {
               margin="normal"
             />
             <Header type="h4" text={`You would save ${formatCurrency(monthlySavings)} per month`} />
-            <Header 
-              type="h4" 
-              text={`You could receive ${formatCurrency(finalInvestmentValue)}`} 
-            />
+            <Header type="h4" text={`You could receive ${formatCurrency(finalInvestmentValue)}`} />
           </div>
         </div>
       </div>
