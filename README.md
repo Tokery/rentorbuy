@@ -6,3 +6,5 @@
  - [ ] Add utility bill to calculation
  - [ ] Add sales tax
  - [ ] Add brokerage fees
+ - [ ] Add simulated recession
+ - [ ] Improve UI
