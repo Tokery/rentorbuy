@@ -1,7 +1,11 @@
 import React from 'react';
 import TextField from '@material-ui/core/TextField';
-import Typography from '@material-ui/core/Typography';
+import numeral from 'numeral';
+
 import MortgageService from './mortgageService';
+import Header from './Header';
+
+const formatCurrency = (value) => numeral(value).format('$0,0.00');
 
 class App extends React.Component {
   constructor() {
@@ -44,68 +48,70 @@ class App extends React.Component {
   render() {
     const mortgagePayment = MortgageService.calculateMonthlyPayment(this.state.mortgageDetails.loanAmt, this.state.mortgageDetails.interest, this.state.mortgageDetails.amortPeriod);
     const monthlySavings = MortgageService.calculateInvestableAmount(mortgagePayment, this.state.rentTotal);
+    const finalInvestmentValue = MortgageService.calculateTotalReturn(monthlySavings, this.state.investReturn, this.state.mortgageDetails.amortPeriod);
     return (
       <div className="App">
-        <div className="mortgage-inputs">
-          <TextField
-            id="loanAmt"
-            label="Loan Amount"
-            name="loanAmt"
-            // className={classes.textField}
-            value={this.state.mortgageDetails.loanAmt}
-            onChange={this.onInputChanged}
-            margin="normal"
-          />
-          
-          <TextField
-            id="interest"
-            label="Interest Rate"
-            name="interest"
-            // className={classes.textField}
-            value={this.state.mortgageDetails.interest}
-            onChange={this.onInputChanged}
-            margin="normal"
-          />
+        <div className="body">
+          <div className="mortgage-inputs">
+            <Header type="h3" text="Buy a home" />
+            <TextField
+              id="loanAmt"
+              label="Loan Amount"
+              name="loanAmt"
+              // className={classes.textField}
+              value={this.state.mortgageDetails.loanAmt}
+              onChange={this.onInputChanged}
+              margin="normal"
+            />
+            
+            <TextField
+              id="interest"
+              label="Interest Rate"
+              name="interest"
+              // className={classes.textField}
+              value={this.state.mortgageDetails.interest}
+              onChange={this.onInputChanged}
+              margin="normal"
+            />
 
-          <TextField
-            id="amortPeriod"
-            label="Amortization Period"
-            name="amortPeriod"
-            // className={classes.textField}
-            value={this.state.mortgageDetails.amortPeriod}
-            onChange={this.onInputChanged}
-            margin="normal"
-          />
-          <Typography variant="h3">
-            You will pay {mortgagePayment}
-          </Typography>
-        </div>
-        <div className="rent-inputs">
-          <TextField
-            id="rentTotal"
-            label="Monthly Rent"
-            name="rentTotal"
-            // className={classes.textField}
-            value={this.state.rentTotal}
-            onChange={this.onRentChanged}
-            margin="normal"
-          />
+            <TextField
+              id="amortPeriod"
+              label="Amortization Period"
+              name="amortPeriod"
+              // className={classes.textField}
+              value={this.state.mortgageDetails.amortPeriod}
+              onChange={this.onInputChanged}
+              margin="normal"
+            />
+            <Header type="h4" text={`You will pay ${formatCurrency(mortgagePayment)} per month`} />
+          </div>
+          <div className="rent-inputs">
+            <Header type="h3" text="Rent a home" />
+            <TextField
+              id="rentTotal"
+              label="Monthly Rent"
+              name="rentTotal"
+              // className={classes.textField}
+              value={this.state.rentTotal}
+              onChange={this.onRentChanged}
+              margin="normal"
+            />
 
-          <TextField
-            id="investReturn"
-            label="Expected investment return"
-            name="investReturn"
-            // className={classes.textField}
-            value={this.state.investReturn}
-            onChange={this.onRentChanged}
-            margin="normal"
-          />
-          <Typography variant="h3">
-            You could save {monthlySavings}
-          </Typography>
-          <Typography variant="h3">
-          You could receive {MortgageService.calculateTotalReturn(monthlySavings, this.state.investReturn, this.state.mortgageDetails.amortPeriod)}
-          </Typography>
+            <TextField
+              id="investReturn"
+              label="Expected investment return"
+              name="investReturn"
+              // className={classes.textField}
+              value={this.state.investReturn}
+              onChange={this.onRentChanged}
+              margin="normal"
+            />
+            <Header type="h4" text={`You would save ${formatCurrency(monthlySavings)} per month`} />
+            <Header 
+              type="h4" 
+              text={`You could receive ${formatCurrency(finalInvestmentValue)}`} 
+            />
+          </div>
         </div>
       </div>
     );
