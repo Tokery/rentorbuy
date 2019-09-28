@@ -12,7 +12,8 @@ class App extends React.Component {
     super();
     this.state = {
       mortgageDetails: {
-        loanAmt: 300000,
+        housePrice: 500000,
+        loanAmt: 400000,
         interest: 0.03,
         amortPeriod: 10,
       },
@@ -32,7 +33,7 @@ class App extends React.Component {
     const newMortgageDetails = Object.assign(this.state.mortgageDetails, {[name]: value});
     this.setState({
       mortgageDetails: newMortgageDetails,
-    })
+    });
   }
 
   onRentChanged(event) {
@@ -48,12 +49,22 @@ class App extends React.Component {
   render() {
     const mortgagePayment = MortgageService.calculateMonthlyPayment(this.state.mortgageDetails.loanAmt, this.state.mortgageDetails.interest, this.state.mortgageDetails.amortPeriod);
     const monthlySavings = MortgageService.calculateInvestableAmount(mortgagePayment, this.state.rentTotal);
-    const finalInvestmentValue = MortgageService.calculateTotalReturn(monthlySavings, this.state.investReturn, this.state.mortgageDetails.amortPeriod);
+    const finalInvestmentValue = MortgageService.calculateTotalReturn(monthlySavings, this.state.investReturn, this.state.mortgageDetails.amortPeriod, this.state.mortgageDetails.housePrice - this.state.mortgageDetails.loanAmt);
     return (
       <div className="App">
         <div className="body">
           <div className="mortgage-inputs">
             <Header type="h3" text="Buy a home" />
+            <TextField
+              id="housePrice"
+              label="House Price"
+              name="housePrice"
+              // className={classes.textField}
+              value={this.state.mortgageDetails.housePrice}
+              onChange={this.onInputChanged}
+              margin="normal"
+            />
+
             <TextField
               id="loanAmt"
               label="Loan Amount"
@@ -63,7 +74,7 @@ class App extends React.Component {
               onChange={this.onInputChanged}
               margin="normal"
             />
-            
+            <br />
             <TextField
               id="interest"
               label="Interest Rate"
@@ -84,7 +95,7 @@ class App extends React.Component {
               margin="normal"
             />
             <Header type="h4" text={`You will pay ${formatCurrency(mortgagePayment)} per month`} />
-            <Header type="h4" text={`You could receive ${formatCurrency(this.state.mortgageDetails.loanAmt)}`} />
+            <Header type="h4" text={`You could receive ${formatCurrency(this.state.mortgageDetails.housePrice)}`} />
           </div>
           <div className="rent-inputs">
             <Header type="h3" text="Rent a home" />

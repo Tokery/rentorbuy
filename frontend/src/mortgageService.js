@@ -13,14 +13,15 @@ class MortgageService {
         return monthlyMortgage - monthlyRent;
     }
 
-    static calculateTotalReturn(monthlyInvested, annualReturn, yearsInvested) {
+    static calculateTotalReturn(monthlyInvested, annualReturn, yearsInvested, downPayment) {
         // Calculates returns assuming annual compounding
-        // Essentially calcuating the future value of an annuity
+        // Essentially calculating the future value of an annuity
         monthlyInvested = Utility.convertToNumber(monthlyInvested);
         annualReturn = Utility.convertToNumber(annualReturn);
         yearsInvested = Utility.convertToNumber(yearsInvested);
         
-        return (monthlyInvested * 12) * ((Math.pow(1 + annualReturn, yearsInvested) - 1) / annualReturn);
+        return (monthlyInvested * 12) * ((Math.pow(1 + annualReturn, yearsInvested) - 1) / annualReturn) + 
+                downPayment * Math.pow(1 + annualReturn, yearsInvested);
     }
 };
 
