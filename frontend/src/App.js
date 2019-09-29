@@ -65,6 +65,7 @@ class App extends React.Component {
               value={this.state.mortgageDetails.housePrice}
               onChange={this.onInputChanged}
               margin="normal"
+              variant="outlined"
             />
 
             <TextField
@@ -75,6 +76,7 @@ class App extends React.Component {
               value={this.state.mortgageDetails.loanAmt}
               onChange={this.onInputChanged}
               margin="normal"
+              variant="outlined"
             />
             <br />
             <TextField
@@ -85,6 +87,7 @@ class App extends React.Component {
               value={this.state.mortgageDetails.interest}
               onChange={this.onInputChanged}
               margin="normal"
+              variant="outlined"
             />
 
             <TextField
@@ -95,6 +98,7 @@ class App extends React.Component {
               value={this.state.mortgageDetails.amortPeriod}
               onChange={this.onInputChanged}
               margin="normal"
+              variant="outlined"
             />
 
             <br />
@@ -106,6 +110,7 @@ class App extends React.Component {
               value={this.state.mortgageDetails.houseReturn}
               onChange={this.onInputChanged}
               margin="normal"
+              variant="outlined"
             />
 
             <Header type="h4" text={`You will pay ${formatCurrency(mortgagePayment)} per month`} />
@@ -121,6 +126,7 @@ class App extends React.Component {
               value={this.state.rentTotal}
               onChange={this.onRentChanged}
               margin="normal"
+              variant="outlined"
             />
 
             <TextField
@@ -131,6 +137,7 @@ class App extends React.Component {
               value={this.state.investReturn}
               onChange={this.onRentChanged}
               margin="normal"
+              variant="outlined"
             />
             <Header type="h4" text={`You would save ${formatCurrency(monthlySavings)} per month`} />
             <Header type="h4" text={`You could receive ${formatCurrency(finalInvestmentValue)}`} />
