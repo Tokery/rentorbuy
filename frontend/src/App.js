@@ -16,6 +16,7 @@ class App extends React.Component {
         loanAmt: 400000,
         interest: 0.03,
         amortPeriod: 10,
+        houseReturn: 0.02,
       },
       rentTotal: 2000,
       investReturn: 0.05,
@@ -50,6 +51,7 @@ class App extends React.Component {
     const mortgagePayment = MortgageService.calculateMonthlyPayment(this.state.mortgageDetails.loanAmt, this.state.mortgageDetails.interest, this.state.mortgageDetails.amortPeriod);
     const monthlySavings = MortgageService.calculateInvestableAmount(mortgagePayment, this.state.rentTotal);
     const finalInvestmentValue = MortgageService.calculateTotalReturn(monthlySavings, this.state.investReturn, this.state.mortgageDetails.amortPeriod, this.state.mortgageDetails.housePrice - this.state.mortgageDetails.loanAmt);
+    const futureHousePrice = MortgageService.calculateFutureHousePrice(this.state.mortgageDetails.housePrice, this.state.mortgageDetails.houseReturn, this.state.mortgageDetails.amortPeriod);
     return (
       <div className="App">
         <div className="body">
@@ -94,8 +96,20 @@ class App extends React.Component {
               onChange={this.onInputChanged}
               margin="normal"
             />
+
+            <br />
+            <TextField
+              id="houseReturn"
+              label="Expected house price increase"
+              name="houseReturn"
+              // className={classes.textField}
+              value={this.state.mortgageDetails.houseReturn}
+              onChange={this.onInputChanged}
+              margin="normal"
+            />
+
             <Header type="h4" text={`You will pay ${formatCurrency(mortgagePayment)} per month`} />
-            <Header type="h4" text={`You could receive ${formatCurrency(this.state.mortgageDetails.housePrice)}`} />
+            <Header type="h4" text={`You could receive ${formatCurrency(futureHousePrice)}`} />
           </div>
           <div className="rent-inputs">
             <Header type="h3" text="Rent a home" />

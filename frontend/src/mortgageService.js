@@ -23,6 +23,13 @@ class MortgageService {
         return (monthlyInvested * 12) * ((Math.pow(1 + annualReturn, yearsInvested) - 1) / annualReturn) + 
                 downPayment * Math.pow(1 + annualReturn, yearsInvested);
     }
+
+    static calculateFutureHousePrice(currentHousePrice, annualReturn, yearsInvested) {
+        currentHousePrice = Utility.convertToNumber(currentHousePrice);
+        annualReturn = Utility.convertToNumber(annualReturn);
+        yearsInvested = Utility.convertToNumber(yearsInvested);
+        return currentHousePrice * Math.pow((1 + annualReturn), yearsInvested);
+    }
 };
 
 export default MortgageService;
