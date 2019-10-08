@@ -8,3 +8,6 @@
  - [ ] Add brokerage fees
  - [ ] Add simulated recession
  - [ ] Improve UI
+
+
+ A terrible change
