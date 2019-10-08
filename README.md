@@ -8,3 +8,6 @@
  - [ ] Add brokerage fees
  - [ ] Add simulated recession
  - [ ] Improve UI
+
+ ### Long Term Plan
+ Similar to New York Times rent or buy calculator but with additional features and better UI
