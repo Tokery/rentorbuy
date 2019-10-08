@@ -11,3 +11,5 @@
 
  ### Long Term Plan
  Similar to New York Times rent or buy calculator but with additional features and better UI
+
+ A terrible change
